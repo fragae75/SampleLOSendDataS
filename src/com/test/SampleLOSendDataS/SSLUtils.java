@@ -15,12 +15,23 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-/**
- * Created by existenz25 on 10/11/2016.
- */
 
 public class SSLUtils {
 
+	/**
+	 * 
+	 * @param caCertStream
+	 * @return
+	 * @throws KeyStoreException
+	 * @throws CertificateException
+	 * @throws NoSuchAlgorithmException
+	 * @throws IOException
+	 * 
+	 * Build a Certificate from the CA input stream
+	 * Build a KeyStore with the Certificate
+	 * Build a ThrustManager array from the KeyStore
+	 * 
+	 */
     public static TrustManager[] getTrustManagers(InputStream caCertStream)
             throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
 
@@ -39,6 +50,7 @@ public class SSLUtils {
         return tmf.getTrustManagers();
     }
 
+    /*
     public static KeyManager[] getKeyManagers(InputStream clientBksStream, String clientJksPassword, String clientKeyPairPassword)
             throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException, UnrecoverableKeyException {
 
@@ -51,4 +63,5 @@ public class SSLUtils {
         return kmf.getKeyManagers();
 
     }
+    */
 }

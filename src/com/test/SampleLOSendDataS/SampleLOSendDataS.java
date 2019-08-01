@@ -1,6 +1,5 @@
 package com.test.SampleLOSendDataS;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +28,15 @@ import com.test.SampleLOSendDataS.MyKey;
 
 public class SampleLOSendDataS {
 
-	
+	/**
+	 * 
+	 * @param caCertStream
+	 * @return
+	 * @throws MqttSecurityException
+	 * @throws KeyManagementException
+	 * 
+	 * Get a ThrustManager array, create a TLS SSLContext with this ThrustManager and return a SSL Socket factory
+	 */
     private static SSLSocketFactory getSSLSocketFactory (InputStream caCertStream) throws MqttSecurityException, KeyManagementException {
         try{
             SSLContext ctx;
@@ -86,8 +93,9 @@ public class SampleLOSendDataS {
             connOpts.setPassword(API_KEY.toCharArray()); // passing API key value as password
             connOpts.setCleanSession(true);
             
-            InputStream is = new FileInputStream("D://Eclipse//Workspace//SampleLODataS//ca_cert_LO.txt");
-
+            // Get the certificate from the program resource and build a SSLSocketFactory
+            InputStream is = SampleLOSendDataS.class.getResourceAsStream("/ca_cert_LO.txt");
+            
             SSLSocketFactory sslSocketFactory = getSSLSocketFactory(is);
             connOpts.setSocketFactory(sslSocketFactory);
 
